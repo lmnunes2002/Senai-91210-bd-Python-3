@@ -15,6 +15,6 @@ criar um back-end com conexão de banco de dados.
 - Linguagem de programação: Python
 - ORM: SQLAlchemy
 - Banco de Dados: MySQL
-- Conteinerização: Docker
+- Containerização: Docker
 - Orquestração de contêineres: Docker Compose
 - Versionamento: Git
