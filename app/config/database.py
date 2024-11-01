@@ -4,7 +4,7 @@ from contextlib import contextmanager
 
 # Parâmetros para conexão com banco de dados.
 db_user = "user"
-db_password = "123"
+db_password = "user_password"
 db_host = "localhost"
 db_port = "3306"
 db_name = "meu_banco"
