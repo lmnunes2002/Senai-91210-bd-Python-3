@@ -18,7 +18,7 @@ def main():
 
     # Exibindo todos os usuários.
     print("\nListando usuários cadastrados: ")
-    lista_usuarios = service.listar_todos_usuarios
+    lista_usuarios = service.listar_todos_usuarios()
 
     for usuario in lista_usuarios:
         print(f"\nNome: {usuario.id} \nE-mail: {usuario.email} \nSenha: {usuario.senha}\n")
