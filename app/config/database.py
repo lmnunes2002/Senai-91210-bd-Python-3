@@ -14,7 +14,7 @@ DATABASE_URL = f"mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db
 
 # Conectando ao banco de dados.
 db = create_engine(DATABASE_URL)
-Session = sessionmaker(bind = db)
+Session = sessionmaker(bind=db)
 session = Session()
 
 # Gerenciando conxeão com banco de dados.

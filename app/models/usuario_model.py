@@ -9,7 +9,7 @@ class Usuario(Base):
     __tablename__ = "usuarios"
 
     # Definindo  da tabela.
-    id = Column(Integer, primary_key= True, autoincrement= True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(150))
     email = Column(String(150))
     senha = Column(String(150))
@@ -21,4 +21,4 @@ class Usuario(Base):
         self.senha = senha
 
 # Criando tabela no banco de dados.
-Base.metadata.create_all(bind = db)
+Base.metadata.create_all(bind=db)
