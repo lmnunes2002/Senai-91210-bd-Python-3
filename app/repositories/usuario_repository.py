@@ -8,10 +8,17 @@ class UsuarioRepository:
     def salvar_usuario(self, usuario: Usuario):
         self.session.add(usuario)
         self.session.commit()
-        self.session.refresh()
-
+        self.session.refresh(usuario)
+    
     def pesquisar_usuario_por_email(self, email: str):
-        return self.session.query(Usuario).filter_by(email=email).first()
+        return self.session.query(Usuario).filter_by(email= email).first()
+    
+    def pesquisar_usuario_por_id(self, id: int):
+        return self.session.query(Usuario).get(id)
+
+    def atualizar_usuario(self, usuario: Usuario):
+        self.session.commit()
+        self.session.refresh(usuario)
 
     def deletar_usuario(self, usuario: Usuario):
         self.session.delete(usuario)
