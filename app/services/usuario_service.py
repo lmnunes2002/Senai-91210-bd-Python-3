@@ -66,7 +66,7 @@ class UsuarioService:
         except Exception as error:
             print(f"Ocorreu um erro ao atualizar o email do usuário: {error}")
 
-    def atualizar_usuario_senha(self, nome:str, senha:str, nova_senha:str):
+    def atualizar_usuario_senha(self, nome:str, email:str, senha:str, nova_senha:str):
         try:
             usuario = self.repository.pesquisar_usuario_por_email(email)
 
