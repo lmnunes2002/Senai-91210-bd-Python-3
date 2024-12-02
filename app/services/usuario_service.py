@@ -96,4 +96,10 @@ class UsuarioService:
 
     # Validação
     def listar_todos_usuarios(self):
-        return self.repository.listar_todos_usuarios()
+        lista_usuarios = self.repository.listar_todos_usuarios()
+
+        if lista_usuarios:
+                for usuario in lista_usuarios:
+                    print(f"{usuario.id} - {usuario.nome} - {usuario.email}")
+        else:
+            print("Nenhum usuário encontrado.")

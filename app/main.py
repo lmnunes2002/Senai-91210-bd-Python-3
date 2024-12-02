@@ -71,11 +71,11 @@ def main():
             email = input("Digite o email do usuário que deseja deletar: ")
             senha = input("Digite a senha do usuário que deseja deletar: ")
 
-            return service.deletar_usuario(nome=nome, email=email, senha=senha)
+            service.deletar_usuario(nome=nome, email=email, senha=senha)
 
         # Listar todos os usuários.
         elif escolha == 6:
-            return service.listar_todos_usuarios()
+            service.listar_todos_usuarios()
         
          # Sair
         elif escolha == 7:
