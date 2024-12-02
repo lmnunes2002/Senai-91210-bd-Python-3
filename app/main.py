@@ -1,6 +1,7 @@
 import os
 from services.usuario_service import UsuarioService
 from repositories.usuario_repository import UsuarioRepository
+from models.usuario_model import Usuario
 from config.database import Session
 
 def main():
@@ -46,13 +47,34 @@ def main():
                 email = input("Digite o id do usuário para busca: ")
                 service.buscar_usuario_por_id(id)
 
-        # Exibindo dados dos usuários.
-        elif escolha == 7:
-            print("\nListando usuários cadastrados: ")
-            lista_usuarios = service.listar_todos_usuarios()
+        # Atualiza email do usuário.
+        elif escolha == "4":
+             novo_email = input("Digite o novo e-mail do usuário: ")
+             Usuario.email = novo_email
+             service.atualizar_usuario_email(Usuario)
 
-            for usuario in lista_usuarios:
-                print(f"\nNome: {usuario.id} \nE-mail: {usuario.email} \nSenha: {usuario.senha}\n")
+        # Atualiza senha do usuário.
+        elif escolha == "5":
+             nova_senha = input("Digite a nova senha do usuário: ")
+             Usuario.senha = nova_senha
+             service.atualizar_usuario_senha(Usuario)
+
+        # Deleta usuário.
+        elif escolha == "6":
+            nome = input("Digite o nome do usuário que deseja deletar: ")
+            email = input("Digite o email do usuário que deseja deletar: ")
+            senha = input("Digite a senha do usuário que deseja deletar: ")
+
+            return UsuarioService.deletar_usuario(nome=nome, email=email, senha=senha)
+
+        # Listar todos os usuários.
+        elif escolha == "7":
+            return UsuarioService.listar_todos_usuarios()
+        
+         # Sair
+        elif escolha == "0":
+            print("Saindo do sistema. Até logo!")
+            break
 
 if __name__ == "__main__":
     os.system("cls||clear")
