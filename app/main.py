@@ -13,14 +13,14 @@ def main():
         print("\n--- Sistema de Gerenciamento de Usuários ---")
         print("1. Criar usuário")
         print("2. Buscar usuário por email")
-        print("3. Buscar usuário por ID")
-        print("4. Atualizar email do usuário")
-        print("5. Atualizar senha do usuário")
-        print("6. Deletar usuário")
-        print("7. Listar todos os usuários")
-        print("0. Sair")
+        # print("3. Buscar usuário por ID")
+        print("3. Atualizar email do usuário")
+        print("4. Atualizar senha do usuário")
+        print("5. Deletar usuário")
+        print("6. Listar todos os usuários")
+        print("7. Sair")
 
-        escolha = input("Escolha uma opção: ")
+        escolha = int(input("Escolha uma opção: "))
 
         # Solicitando dados do usuário.
         if escolha == 1:
@@ -38,41 +38,47 @@ def main():
             service.criar_usuario(nome, email, senha)
         
         # Busca usuário por email.
-        elif escolha == "2":
+        elif escolha == 2:
                 email = input("Digite o email do usuário para busca: ")
                 service.buscar_usuario_por_email(email)
 
-        # Busca usuário por email.
-        elif escolha == "3":
-                email = input("Digite o id do usuário para busca: ")
-                service.buscar_usuario_por_id(id)
-
         # Atualiza email do usuário.
-        elif escolha == "4":
-             novo_email = input("Digite o novo e-mail do usuário: ")
-             Usuario.email = novo_email
-             service.atualizar_usuario_email(Usuario)
+        elif escolha == 3:
+            email = input("Informe o email do usuário a ser atualizado: ").strip()
+            usuario = service.buscar_usuario_por_email(email)
+            novo_email = input("Digite o novo e-mail do usuário: ").strip()
+
+            if service.atualizar_usuario_email(novo_email, email):
+                print("Atualização concluída com sucesso!")
+            else:
+                print("Falha ao atualizar o email.")
 
         # Atualiza senha do usuário.
-        elif escolha == "5":
-             nova_senha = input("Digite a nova senha do usuário: ")
-             Usuario.senha = nova_senha
-             service.atualizar_usuario_senha(Usuario)
+        elif escolha == 4:
+            email = input("Digite o email do usuário: ")
+            usuario = service.buscar_usuario_por_email(email)
+            nova_senha = input("Digite a nova senha do usuário: ").strip()
+
+            if service.atualizar_usuario_senha(nova_senha, email):
+                usuario.senha = input("Digite a nova senha do usuário: ")
+                service.atualizar_usuario_senha(usuario)
+            else:
+                print("Usuário não encontrado")
 
         # Deleta usuário.
-        elif escolha == "6":
+        elif escolha == 5:
             nome = input("Digite o nome do usuário que deseja deletar: ")
             email = input("Digite o email do usuário que deseja deletar: ")
             senha = input("Digite a senha do usuário que deseja deletar: ")
 
-            return UsuarioService.deletar_usuario(nome=nome, email=email, senha=senha)
+            return service.deletar_usuario(nome=nome, email=email, senha=senha)
 
         # Listar todos os usuários.
-        elif escolha == "7":
-            return UsuarioService.listar_todos_usuarios()
+        elif escolha == 6:
+            return service.listar_todos_usuarios()
         
          # Sair
-        elif escolha == "0":
+        elif escolha == 7:
             print("Saindo do sistema. Até logo!")
             break
 

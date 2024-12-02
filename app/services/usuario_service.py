@@ -30,74 +30,69 @@ class UsuarioService:
 
             if usuario:
                 print(f"Usuário encontrado: {usuario.id} - {usuario.nome} - {usuario.email}")
-            else:
-                print("Usuário não encontrado")
-        except Exception as error:
-            print("Ocorreu um erro inesperado: {error}.")
-
-    def buscar_usuario_por_id(self, id: int):
-        try:
-            usuario = self.repository.pesquisar_usuario_por_id(id)
-
-            if usuario:
-                print(f"Usuário encontrado: {usuario.id} - {usuario.nome} - {usuario.email}")
+                return usuario
             else:
                 print("Usuário não encontrado")
         except Exception as error:
             print("Ocorreu um erro inesperado: {error}.")
 
     # Update.
-    def atualizar_usuario_email(self, nome:str, email:str, novo_email:str):
+    def atualizar_usuario_email(self, novo_email: str, email: str):
         try:
             usuario = self.repository.pesquisar_usuario_por_email(email)
 
             if not usuario:
                 print("Usuário não encontrado.")
+                return False
 
             usuario.email = novo_email
 
             atualizado = self.repository.atualizar_usuario(usuario)
-
+            
             if atualizado:
                 print("Email do usuário atualizado com sucesso!")
+                return True
             else:
-                print("Falha ao atualizar o email do usuário.")
-            return atualizado
+                print("Falha ao atualizar o email do usuário. Verifique a persistência.")
+                return False
         except Exception as error:
             print(f"Ocorreu um erro ao atualizar o email do usuário: {error}")
+            return False
 
-    def atualizar_usuario_senha(self, nome:str, email:str, senha:str, nova_senha:str):
+    def atualizar_usuario_senha(self, nova_senha: str, email: str):
         try:
             usuario = self.repository.pesquisar_usuario_por_email(email)
 
             if not usuario:
                 print("Usuário não encontrado.")
-
+                return False
+            
             usuario.senha = nova_senha
 
             atualizado = self.repository.atualizar_usuario(usuario)
 
             if atualizado:
                 print("Senha do usuário atualizado com sucesso!")
+                return True
             else:
                 print("Falha ao atualizar a senha do usuário.")
-            return atualizado
+                return False
         except Exception as error:
             print(f"Ocorreu um erro ao atualizar a senha do usuário: {error}")
-   
+
     # Delete.
     def deletar_usuario(self, nome:str, email:str, senha:str):
         try:
-            usuario = Usuario(nome = nome,email= email, senha= senha)
+            usuario = self.repository.pesquisar_usuario_por_email(email)
 
-            cadastrado = self.repository.pesquisar_usuario_por_email(email = usuario.email)
-
-            if cadastrado:
-                self.repository.deletar_usuario(email = usuario.email)
+            if usuario:
+                self.repository.deletar_usuario(usuario = usuario)
+                return True 
             else:
                 print("Usuário não encontrado no bancdo de dados.")
+                return False
         except Exception as error:
-            print("Ocorreu um erro inesperado: {error}.")
+            print(f"Ocorreu um erro inesperado: {error}.")
 
     # Validação
     def listar_todos_usuarios(self):
